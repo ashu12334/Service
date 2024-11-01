@@ -11,13 +11,20 @@ import androidx.annotation.Nullable;
 public class MyCustomService extends Service {
      MediaPlayer player;
     @Nullable
+    public int  onStartCommand(Intent intent,int flags, int startId){
+        player = MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI);
+        player.setLooping(true);
+        player.start();
+        return START_STICKY;
+    }
+    public void onDestroy(){
+        super.onDestroy();
+        player.stop();
+    }
     @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
-   public int  onStartCommand(Intent intent,int flags, int startId){
-          player = MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI);
-        return START_STICKY;
-   }
+
 
 }
