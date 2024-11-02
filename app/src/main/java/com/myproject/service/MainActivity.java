@@ -2,6 +2,7 @@ package com.myproject.service;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+       IntentFilter intentFilter = new IntentFilter("android.intent.action.AIRPLANE_MODE");
+       AirplaneModeReceiver br = new AirplaneModeReceiver();
+       registerReceiver(br,intentFilter);
 
         txt = findViewById(R.id.txt1);
         strt_btn = findViewById(R.id.start_btn);
